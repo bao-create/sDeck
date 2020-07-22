@@ -17,7 +17,7 @@ def k_read(file,words):
                     bulk_def = True
                 else: #if we arent in bulk def see if it is a supported keyword
                     bulk_def = False
-                    for i in range(len(words)): #if its not a comment check the line for one of the words
+                    for i in range(len(words)): #if its not a comment check the line for one of the supported keywords
                         if line.find(words[i]) == -1:
                             cnt += 1
                             continue #continue if it cant find it
@@ -26,12 +26,12 @@ def k_read(file,words):
                             bulk_def = False #make this false so it wont try to make an item object from it
                             break #one word per line
                         
-                if cnt == len(words): #if we have tried all supported words and failed
-                    sup = False
-                else:
-                    sup =True
+                    if cnt == len(words): #if we have tried all supported words and failed
+                        sup = False
+                    else:
+                        sup = True
 
-                if bulk_def  and sup: # if its a support bulk def entry create the items as needed
+                if bulk_def  and sup: # if its a supported bulk def entry create the items as needed
                     if item_type == 0:
                         currentNode = node(line)
                         model.appendNode(currentNode)
