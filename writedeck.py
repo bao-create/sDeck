@@ -10,10 +10,17 @@ def writedeck(model,filename):
             for key,value in model.eles[0].ELE_SOLID:
                 if len(value.nodes) == 4:
                     line = "CTETRA" + "    "+ key +"    "+ value.nodes[0] +"    " + value.nodes[1]+"    " + value.nodes[2] +"    "+ value.nodes[3]
-                elif len(value.nodes) == 6:
-                    line = "CHEXA" + "    "+ key +"    "+ value.nodes[0] +"    " + value.nodes[1]+"    " + value.nodes[2] +"    "+ value.nodes[3] +"    "+ value.nodes[4] +"    "+ value.nodes[5]
+                elif len(value.nodes) == 8:
+                    line = "CHEXA" + "    "+ key +"    "+ value.nodes[0] +"    " + value.nodes[1]+"    " + value.nodes[2] +"    "+ value.nodes[3] +"    "+ value.nodes[4] +"    "+ value.nodes[5]+"    "+ value.nodes[6]+"    "+ value.nodes[7]
                 f.write(line)
+            for key,value in model.eles[0].ELE_SHELL:
+                if len(value.nodes) == 4:
+                    line = "CQUAD4" + "    "+ key +"    "+ value.nodes[0] +"    " + value.nodes[1]+"    " + value.nodes[2] +"    "+ value.nodes[3]
+                elif len(value.nodes) == 8:
+                    line = "CQUAD8" + "    "+ key +"    "+ value.nodes[0] +"    " + value.nodes[1]+"    " + value.nodes[2] +"    "+ value.nodes[3] +"    "+ value.nodes[4] +"    "+ value.nodes[5]+"    "+ value.nodes[6]+"    "+ value.nodes[7]
+
             f.write("ENDDATA")
     else:
+        pass
         #write dyna
     return
